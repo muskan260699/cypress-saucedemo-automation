@@ -1,7 +1,7 @@
 {
   "name": "saucedemo",
   "version": "1.0.0",
-  "description": "",
+  "description": "Cypress automation suite for SauceDemo (GreenShield)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^15.17.0"
+    "cypress": "^15.18.0"
   }
 }

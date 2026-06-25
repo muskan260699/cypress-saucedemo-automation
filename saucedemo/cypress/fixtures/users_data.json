@@ -1,0 +1,17 @@
+{
+  "user_details": {
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "firstName": "Standard ",
+    "lastName": "User",
+    "postalCode": "N2H0G3"
+  },
+
+  "invalid_details":{
+    "username": "invalid_user",
+    "password": "invaliduser",
+    "firstName": "Invalid ",
+    "lastName": "User",
+    "postalCode": "N2H0G7"
+  }
+}
