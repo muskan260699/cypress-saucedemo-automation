@@ -69,15 +69,36 @@ describe("Test case 1 - Shopping Cart Workflow - End-to-End Validation", () => {
     CartPage.getAllCartItems().should("not.contain", productToRemove);
 
     // Checkout flow
-    CartPage.checkout();
-    CheckoutPage.fillCheckoutInfo({ firstName, lastName, postalCode });
-    CheckoutPage.finishOrder();
-    CheckoutPage.getCompleteHeader().should("have.text", "Thank you for your order!");
+    CartPage.getItemPrices().then((prices) => {
+      let expectedItemTotal = 0;
+      prices.forEach((price) => {
+        expectedItemTotal += price;
+      });
 
-    // Aftee checkout, the inventory and the cart should comeback to its default state
-    CheckoutPage.backToProducts();
-    cy.url().should("include", "/inventory.html");
-    ProductsPage.getCartBadge().should("not.exist");
+      CartPage.checkout();
+      CheckoutPage.fillCheckoutInfo({ firstName, lastName, postalCode });
+
+      CheckoutPage.getItemTotal().then((itemTotal) => {
+        expect(itemTotal.toFixed(2)).to.eq(expectedItemTotal.toFixed(2));
+
+        CheckoutPage.getTax().then((tax) => {
+          CheckoutPage.getOrderTotal().then((total) => {
+            const expectedTotal = expectedItemTotal + tax;
+            expect(total.toFixed(2)).to.eq(expectedTotal.toFixed(2));
+
+            CheckoutPage.finishOrder();
+            CheckoutPage.getCompleteHeader().should(
+              "have.text",
+              "Thank you for your order!",
+            );
+            CheckoutPage.backToProducts();
+            cy.url().should("include", "/inventory.html");
+            ProductsPage.getCartBadge().should("not.exist");
+          });
+        });
+      });
+    });
   });
 });
+
 
