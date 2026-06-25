@@ -10,22 +10,22 @@ describe("Invalid Login Details", () => {
     });
   });
 
-  it("should not login with empty credentials", () => {
+  it("Users should not be able to login with empty credentials", () => {
     cy.login("", "");
     LoginPage.getErrorMessage().should("be.visible").should("contain","Username is required");
   });
 
-  it("should not login with empty username", () => {
+  it("Users should get error if username is empty", () => {
     cy.login("", users.user_details.password);
     LoginPage.getErrorMessage().should("be.visible").should("contain","Username is required");
   });
 
-  it("should not login with empty password", () => {
+  it("users should get error if userpasswordname is empty", () => {
     cy.login(users.user_details.username, "");
     LoginPage.getErrorMessage().should("be.visible").should("contain","Password is required");
   });
 
-  it("should not login with invalid credentials", () => {
+  it("Users should not be able login with invalid credentials", () => {
     cy.login(users.invalid_details.username,users.invalid_details.password);
     LoginPage.getErrorMessage().should("be.visible").should("contain","Username and password do not match any user in this service");
   });
