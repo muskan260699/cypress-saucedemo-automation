@@ -39,6 +39,26 @@ class CheckoutPage extends BasePage {
   getCompleteHeader() {
     return this.completeHeader;
   }
+getItemTotal() {
+    return cy
+      .get(".summary_subtotal_label")
+      .invoke("text")
+      .then((text) => parseFloat(text.split("$")[1]));
+  }
+
+  getTax() {
+    return cy
+      .get(".summary_tax_label")
+      .invoke("text")
+      .then((text) => parseFloat(text.split("$")[1]));
+  }
+
+  getOrderTotal() {
+    return cy
+      .get(".summary_total_label")
+      .invoke("text")
+      .then((text) => parseFloat(text.split("$")[1]));
+  }
 }
 
 export default new CheckoutPage();
