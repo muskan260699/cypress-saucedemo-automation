@@ -5,7 +5,8 @@ Building end-to-end test using Cypress for Sauce Demo covering login, adding and
 Setup
 
 1. Clone the repository
-2. Install dependencies from the project root using the following command -> npm install
+2. Install dependencies from the project root using the following command -> 
+   --> npm install cypress --save-dev
 3. Running the test cases:
    Headless mode : npx cypress run
    Headed mode : npx cypress open
