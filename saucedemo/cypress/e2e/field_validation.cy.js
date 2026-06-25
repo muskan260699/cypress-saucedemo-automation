@@ -20,7 +20,7 @@ describe("Invalid Login Details", () => {
     LoginPage.getErrorMessage().should("be.visible").should("contain","Username is required");
   });
 
-  it("users should get error if userpasswordname is empty", () => {
+  it("users should get error if password is empty", () => {
     cy.login(users.user_details.username, "");
     LoginPage.getErrorMessage().should("be.visible").should("contain","Password is required");
   });
