@@ -28,7 +28,7 @@ class CartPage extends BasePage {
   checkout() {
     this.checkoutButton.click();
   }
-  
+
   getItemPrices() {
     return cy.get(".inventory_item_price").then(($prices) => {
       return [...$prices].map((el) => parseFloat(el.innerText.split("$")[1]));

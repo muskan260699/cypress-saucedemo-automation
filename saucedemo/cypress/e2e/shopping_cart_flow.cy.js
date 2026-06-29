@@ -18,7 +18,7 @@ describe("Test case 1 - Shopping Cart Workflow - End-to-End Validation", () => {
   });
 
   beforeEach(() => {
-    //Login into the website and check if it lands on the inventory page 
+    //Login into the website and check if it lands on the inventory page
     cy.login(users.user_details.username, users.user_details.password);
     cy.url().should("include", "/inventory.html");
     ProductsPage.getInventoryList().should("be.visible");
@@ -33,7 +33,7 @@ describe("Test case 1 - Shopping Cart Workflow - End-to-End Validation", () => {
     items.forEach((item) => {
       ProductsPage.addProductToCart(item);
     });
-    
+
     //verify cart badge after adding producting
     ProductsPage.getCartBadge().should("have.text", items.length.toString());
 
@@ -99,6 +99,12 @@ describe("Test case 1 - Shopping Cart Workflow - End-to-End Validation", () => {
       });
     });
   });
+
+  //Defect
+  it.only("User should not be able to checkout with no items in cart", () => {
+    ProductsPage.getCartBadge().should("not.exist");
+    ProductsPage.goToCart();
+    CartPage.checkoutButton.should("be.disabled");
+  });
+
 });
-
-
